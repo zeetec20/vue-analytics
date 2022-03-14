@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <button v-on:click="testLog">Log</button>
+
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -31,10 +33,20 @@
 </template>
 
 <script>
+import {Firebase} from '@/service/firebase'
+import {Analytics} from '@/service/analytics'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    testLog() {
+      const firebase = new Firebase()
+      const analytics = new Analytics(firebase.firebase)
+      analytics.logEvent('btn_firman', {})
+    },
   }
 }
 </script>
